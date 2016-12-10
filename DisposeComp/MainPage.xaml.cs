@@ -82,14 +82,14 @@ namespace DisposeComp
 
         private void ImageUnloaded(object sender, RoutedEventArgs e)
         {
-            //var image = (Image)sender;
-            //var photo = image.Tag as Photo;
-            //if (_textSurfaces.ContainsKey(photo.Id))
-            //{
-            //    var textSurface = _textSurfaces[photo.Id];
-            //    _textSurfaces.Remove(photo.Id);
-            //    textSurface.Dispose();
-            //}
+            var image = (Image)sender;
+            var photo = image.Tag as Photo;
+            if (_textSurfaces.ContainsKey(photo.Id))
+            {
+                var textSurface = _textSurfaces[photo.Id];
+                _textSurfaces.Remove(photo.Id);
+                textSurface.Dispose();
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
