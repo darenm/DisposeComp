@@ -32,6 +32,7 @@ namespace DisposeComp
         {
             this.InitializeComponent();
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+            SystemNavigationManager.GetForCurrentView().BackRequested += (sender, args) => Frame.GoBack();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
