@@ -37,7 +37,7 @@ namespace DisposeComp
             var random = new Random();
             var photos = new List<Photo>();
             for (var i = 0; i < 1000; i++)
-                photos.Add(new Photo {Id = i, ImageUri = $"ms-appx:///Assets/{random.Next(12)}.jpg"});
+                photos.Add(new Photo {Id = i, ImageUri = $"ms-appx:///Assets/{random.Next(13)}.jpg"});
             return photos;
         }
 
@@ -83,6 +83,15 @@ namespace DisposeComp
         private void ImageUnloaded(object sender, RoutedEventArgs e)
         {
             var image = (Image)sender;
+            var container = ElementCompositionPreview.GetElementChildVisual(image) as ContainerVisual;
+            if (container != null)
+            {
+                foreach (var containerChild in container.Children)
+                {
+                    containerChild.Dispose();
+                }
+                container.Dispose();
+            }
             var photo = image.Tag as Photo;
             if (_textSurfaces.ContainsKey(photo.Id))
             {

@@ -32,12 +32,23 @@ namespace DisposeComp
         {
             this.InitializeComponent();
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
-            SystemNavigationManager.GetForCurrentView().BackRequested += (sender, args) => Frame.GoBack();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Photo = e.Parameter as Photo;
+            SystemNavigationManager.GetForCurrentView().BackRequested += Detail_BackRequested;
+
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            SystemNavigationManager.GetForCurrentView().BackRequested -= Detail_BackRequested;
+        }
+
+        private void Detail_BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            Frame.GoBack();
         }
 
         public Photo Photo
